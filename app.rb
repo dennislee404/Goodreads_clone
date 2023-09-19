@@ -3,12 +3,14 @@ require 'sinatra/activerecord'
 
 require_relative 'models/book'
 
+set :public_folder, __dir__ + '/public'
+
 get '/login' do 
 	erb :login
 end
 
 get '/' do 
-	erb :index, layout: false
+	erb :index
 end
 
 post '/add-book' do
@@ -27,6 +29,28 @@ get '/books/:id' do
 end
 
 get '/books' do
-	@books = Book.all
+	@books = Book.all.order(created_at: :asc)
 	erb :books
+end
+
+get '/edit-book/:id' do
+	@book = Book.find(params[:id])
+	erb :edit_book
+end
+
+post '/update-book/:id' do 
+	@book = Book.find(params[:id])
+	@book.update(title: params[:title], author: params[:author])
+
+	erb :book
+end
+
+post '/delete-book/:id' do
+	@book = Book.find(params[:id])
+	
+	if @book.destroy
+		redirect '/books'
+	else
+		redirect '/'
+	end
 end

@@ -1,0 +1,16 @@
+<section>
+	 <div class="container">
+	 	<form action="/update-book/<%= @book.id %>" method="POST">
+			<h2>Edit Book</h2>
+			<div class="inputbox">
+				<input type="text" name="title" required>
+				<label for="title">TITLE</label>
+			</div>	
+			<div class="inputbox">
+				<input type="text" name="author" required>				
+				<label for="author">AUTHOR</label>
+			</div>
+			<button>Submit</button>
+	 	</form>
+	</div>
+</section>
