@@ -19,7 +19,8 @@ section{
 }
 
 .container {
-	padding: 30px 30px;
+	margin: 10px;
+	padding: 20px 20px;
 	background: transparent;
 	border: 2px solid #ccc;
 	border-radius: 25px;
@@ -37,10 +38,16 @@ h2 {
 	text-align: center;
 }
 
+h3 {
+	font-size: 1em;
+	color: white;
+	text-align: center;
+}
+
 .inputbox {
 	position: relative;
 	margin: 20px 0;
-	width: 310px;
+	width: 100%;
 	border-bottom: 2px solid white;
 }
 
@@ -57,7 +64,7 @@ h2 {
 
 input:focus ~ label,
 input:valid ~ label {
-	top: -5px;
+	top: -1px;
 }
 .inputbox input {
 	width: 100%;
@@ -73,6 +80,7 @@ input:valid ~ label {
 .link {
 	display: flex;
 	justify-content: center;
+	gap: 10px;
 	margin-top: 10px;
 	text-decoration: none;
 }
@@ -91,9 +99,19 @@ button {
 	outline: none;
 	font-size: 1em;
 	font-weight: 600;
+	padding: 10px;
 }
 
 .library {
 	margin: 20px 0;
 	color: white
+}
+
+.description {
+	margin: 10px 0 ;
+	padding: 10px;
+	width: 600px;
+	height: 50px;
+	border: 1px solid #ccc;
+	border-radius: 15px;
 }
