@@ -2,6 +2,8 @@ require 'sinatra'
 require 'sinatra/activerecord'
 
 require_relative 'models/book'
+require_relative 'models/review'
+
 
 get '/login' do 
 	erb :login
@@ -23,6 +25,8 @@ end
 
 get '/books/:id' do 
 	@book = Book.find(params[:id])
+	@reviews = Review.where(book_id: params[:id])
+	
 	erb :book
 end
 
@@ -51,4 +55,17 @@ post '/delete-book/:id' do
 	else
 		redirect '/'
 	end
+end
+
+post '/review-book/:id' do
+	@book = Book.find(params[:id])
+
+	erb :review_book
+end
+
+post '/update-review-book/:id' do
+	@book = Book.find(params[:id])
+	@book.reviews.create(user: params[:user], score: params[:score], content: params[:content])
+
+	erb :book
 end

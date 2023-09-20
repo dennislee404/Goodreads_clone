@@ -2,7 +2,7 @@
 	 <div class="container">
 	 	<form action="/update-book/<%= @book.id %>" method="POST">
 			<h2><%= @book.title %></h2>
-			<h3>by <%= @book.author %></h3>
+			<h3>by <%= @book.author %></h3>		
 			<div class="inputbox">
 				<input type="text" name="title" value="<%= @book.title %>" required>
 				<label for="title">TITLE</label>

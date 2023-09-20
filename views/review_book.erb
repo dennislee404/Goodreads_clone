@@ -1,0 +1,22 @@
+<section>
+	 <div class="review_container">
+	 	<form action="/update-review-book/<%= @book.id %>" method="POST">
+	 		<h3>Leave a review</h3>
+	 		<div class="x">
+				<div class="inputbox">
+					<input type="text" name="user" required>
+					<label for="user">USER</label>
+				</div>	
+				<div class="inputbox">
+					<input type="text" name="score" required>
+					<label for="score">SCORE</label>
+				</div>
+			</div>	
+			<div class="inputbox">
+				<input type="text" name="content" required>
+				<label for="content">REVIEW</label>
+			</div>	
+			<button>Submit</button>
+	 	</form>
+	</div>
+</section>

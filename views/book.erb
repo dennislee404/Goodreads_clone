@@ -12,6 +12,9 @@
 				<form action="/edit-book/<%= @book.id %>" method="POST">
 					<button>Edit Book</button>
 				</form>	
+				<form action="/review-book/<%= @book.id %>" method="POST">
+					<button>Leave a Review</button>
+				</form>
 				<form action="/delete-book/<%= @book.id %>" method="POST">
 					<button>Delete Book</button>
 				</form>							
@@ -23,6 +26,21 @@
 				<p><a href="/books">Show all books</a></p>
 			</div>
 		</div>
+	</div>
+	<div class="container">
+		<h2>Reviews</h2>
+		<% if @reviews.any? %>
+			<% @reviews.each do |review|%>>
+				<div class="description">
+					<%= review.user %> (<%= review.score %>/5) <br>
+					<%= review.content %>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="description">
+				No reviews yet
+			</div>
+		<% end %>	
 	</div>
 </section>
 

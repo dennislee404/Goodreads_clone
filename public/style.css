@@ -6,6 +6,7 @@
 
 section{
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
@@ -28,6 +29,7 @@ section{
 	position: relative;
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -108,10 +110,30 @@ button {
 }
 
 .description {
-	margin: 10px 0 ;
+	margin: 10px 0;
 	padding: 10px;
 	width: 600px;
 	height: 50px;
 	border: 1px solid #ccc;
 	border-radius: 15px;
+	color: white;
+}
+
+.review_container {
+	margin: 10px;
+	padding: 20px 20px;
+	background: transparent;
+	border: 2px solid #ccc;
+	border-radius: 25px;
+
+	width: 1000px;
+
+/*	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;*/
+}
+
+.x {
+	display: flex;
 }
