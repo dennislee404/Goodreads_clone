@@ -1,10 +1,16 @@
 <header style="display: flex;">
-	<div class="user">
-  		<%= current_user.username %>
-	</div>
-	<form action="/logout" method="POST">
-  		<button>Logout</button>
-	</form> 
+	<% if current_user == nil %>
+		<form action="/login" method="GET">
+	  		<button>Login</button>
+		</form>			
+	<% else %>
+		<div class="user">
+	  		<%= current_user.username %>
+		</div>
+		<form action="/logout" method="POST">
+	  		<button>Logout</button>
+		</form>
+	<% end %> 
 </header>
 <section>
 	<div class="container">
@@ -17,15 +23,19 @@
 				</div>
 			</div>
 			<div class="link">
-				<form action="/edit-book/<%= @book.id %>" method="POST">
-					<button>Edit Book</button>
-				</form>	
+				<% if current_user == @book.user %>
+					<form action="/edit-book/<%= @book.id %>" method="POST">
+						<button>Edit Book</button>
+					</form>
+				<% end %>				
 				<form action="/review-book/<%= @book.id %>" method="POST">
 					<button>Leave a Review</button>
 				</form>
-				<form action="/delete-book/<%= @book.id %>" method="POST">
-					<button>Delete Book</button>
-				</form>							
+				<% if current_user == @book.user %>				
+					<form action="/delete-book/<%= @book.id %>" method="POST">
+						<button>Delete Book</button>
+					</form>
+				<% end %>							
 			</div>
 			<div class="link">
 				<p><a href="/add-book">Add more</a></p>

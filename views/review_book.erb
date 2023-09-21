@@ -12,7 +12,7 @@
 	 		<h3>Leave a review</h3>
 	 		<div class="x">
 				<div class="inputbox">
-					<input type="text" name="user" value=<%= session[:user].username %> required>
+					<input type="text" name="user" value=<%= current_user.username %> required>
 					<label for="user">USER</label>
 				</div>	
 				<div class="inputbox">

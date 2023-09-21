@@ -1,0 +1,45 @@
+<header style="display: flex;">
+	<% if current_user == nil %>
+		<form action="/login" method="GET">
+	  		<button>Login</button>
+		</form>			
+	<% else %>
+		<div class="user">
+	  		<%= current_user.username %>
+		</div>
+		<form action="/logout" method="POST">
+	  		<button>Logout</button>
+		</form>
+	<% end %> 
+</header>
+<section>
+	<div class="container">
+		<form action=""> 
+			<h2>Library of books</h2>
+			<div class="library">
+				<% if @books.any? %>
+					<% @books.each do |book|%>
+						<p>
+							<div class="link">
+								<p><a href="/books/<%= book.id %>"><%= book.title %></a> (<%= %>/5.0)</p>
+							</div>
+						</p>
+						<p style="text-align: center;">
+							by <%= book.author %>
+						</p>
+						<p style="text-align: center;">
+							Added by <%= book.user.username %>
+						</p><br>						
+					<% end %>
+				<% else %>
+					<p>No books found</p> 
+				<% end %>
+			</div>
+			<% if current_user != nil %>
+				<div class="link">
+					<p><a href="/books">Go back to your library</a></p>
+				</div>
+			<% end %>
+		</form>
+	</div>
+</section>

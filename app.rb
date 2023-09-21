@@ -9,7 +9,7 @@ require_relative 'models/user'
 enable :sessions
 
 def current_user
-	@current_user ||= User.find_by(id: session[:user].id)
+	@current_user ||= User.find_by(id: session[:user_id])
 end
 
 get '/login' do 
@@ -20,7 +20,7 @@ post '/login' do
 	@user = User.find_by(username: params[:username])
 
 	if @user && @user.authenticate(params[:password])
-		session[:user] = @user
+		session[:user_id] = @user.id
 		redirect '/books'
 	else
 		redirect '/login'	
@@ -50,12 +50,16 @@ post '/register' do
 	end
 end
 
-get '/add-book' do 
-	erb :add_book
+get '/add-book' do
+	if current_user == nil
+		redirect '/login'
+	else
+		erb :add_book
+	end
 end
 
 post '/add-book' do
-	@book = session[:user].books.create(title: params[:title], author: params[:author])
+	@book = current_user.books.create(title: params[:title], author: params[:author])
 	@reviews = Review.where(book_id: @book.id) 
 
 	if @book.save
@@ -73,8 +77,12 @@ get '/books/:id' do
 end
 
 get '/books' do
-	@books = Book.where(user_id: session[:user].id).order(created_at: :asc)
-	erb :books
+	if current_user == nil
+		redirect '/all-books'
+	else	
+		@books = Book.where(user_id: session[:user_id]).order(created_at: :asc)
+		erb :books
+	end
 end
 
 post '/edit-book/:id' do
@@ -88,7 +96,6 @@ post '/update-book/:id' do
 	@reviews = Review.where(book_id: params[:id])
 
 	erb :book
-
 end
 
 post '/delete-book/:id' do
@@ -104,7 +111,11 @@ end
 post '/review-book/:id' do
 	@book = Book.find(params[:id])
 
-	erb :review_book
+	if current_user == nil
+		redirect '/login'
+	else
+		erb :review_book
+	end
 end
 
 post '/update-review-book/:id' do
@@ -121,4 +132,11 @@ post '/update-review-book/:id' do
 	else
 		erb :review_book
 	end
+end
+
+get '/all-books' do 
+	@books = Book.all.order(created_at: :asc)
+	puts current_user
+
+	erb :all_books
 end
