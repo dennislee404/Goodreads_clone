@@ -21,7 +21,13 @@
 					<% @books.each do |book|%>
 						<p>
 							<div class="link">
-								<p><a href="/books/<%= book.id %>"><%= book.title %></a> (<%= %>/5.0)</p>
+								<p><a href="/books/<%= book.id %>"><%= book.title %></a> (
+									<% if book.score == nil %>
+										-
+									<% else %>
+										<%= sprintf('%.1f', book.score) %>
+									<% end %>
+								/ 5.0 )</p>
 							</div>
 						</p>
 						<p style="text-align: center;">

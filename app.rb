@@ -128,14 +128,14 @@ post '/update-review-book/:id' do
 	# @book.reviews.create(user_id: params[:user], score: params[:score], content: params[:content])
 
 	if @review.save
-		redirect '/books/:id'
+		redirect "/books/#{@book.id}"
 	else
 		erb :review_book
 	end
 end
 
 get '/all-books' do 
-	@books = Book.all.order(created_at: :asc)
+	@books = Book.all.order(score: :desc)
 	puts current_user
 
 	erb :all_books
