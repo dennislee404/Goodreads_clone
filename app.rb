@@ -2,6 +2,9 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'bcrypt'
 
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
+
 require_relative 'models/book'
 require_relative 'models/review'
 require_relative 'models/user'
@@ -12,8 +15,12 @@ def current_user
 	@current_user ||= User.find_by(id: session[:user_id])
 end
 
-get '/login' do 
-	erb :login
+get '/login' do
+	if current_user
+		redirect '/books'
+	else 
+		erb :login
+	end
 end
 
 post '/login' do 
@@ -47,6 +54,14 @@ post '/register' do
 		redirect '/login'
 	else
 		redirect '/register'
+	end
+end
+
+get '/profile' do 
+	if current_user == nil
+		redirect '/login'
+	else
+		erb :profile
 	end
 end
 

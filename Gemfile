@@ -14,6 +14,9 @@ gem 'pg'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 
+#upload photo
+gem 'carrierwave', '~> 2.0'
+
 group :development do
   gem 'debug'
 end

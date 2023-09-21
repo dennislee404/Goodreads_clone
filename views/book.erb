@@ -1,19 +1,5 @@
-<header style="display: flex;">
-	<% if current_user == nil %>
-		<form action="/login" method="GET">
-	  		<button>Login</button>
-		</form>			
-	<% else %>
-		<div class="user">
-	  		<%= current_user.username %>
-		</div>
-		<form action="/logout" method="POST">
-	  		<button>Logout</button>
-		</form>
-	<% end %> 
-</header>
 <section>
-	<div class="container">
+	<div class="container flex-div">
 		<div>
 			<div class="library">
 				<h2><%= @book.title %></h2>
@@ -45,7 +31,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container flex-div">
 		<h2>Reviews</h2>
 		<% if @reviews.any? %>
 			<% @reviews.each do |review|%>>

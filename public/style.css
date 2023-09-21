@@ -4,6 +4,11 @@
 	font-family: 'poppins', sans-serif;
 }
 
+.flex-div{
+	display: flex;
+	justify-content: center;
+}
+
 section{
 	display: flex;
 	flex-direction: column;
@@ -21,18 +26,36 @@ section{
 header{
 	padding: 15px 2%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
-	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	box-shadow: 0 0 10px white;
 	background: black;
 	position: sticky;
 	top: 0;
 	z-index: 10;
-	gap: 10px;
+
+}
+
+.nav_left{
+	align-items: center;
+	gap: 20px;
 }
 
 .user {
 	color: white;
+	font-size: 25px;
+}
+
+.nav_left a{
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	text-decoration: none;
+}
+
+.nav_left img{
+	width: 50px;
+	border-radius: 50%;
 }
 
 .container {
@@ -45,9 +68,7 @@ header{
 	position: relative;
 	width: 40%;
 
-	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 

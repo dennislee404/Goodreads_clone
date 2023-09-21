@@ -6,6 +6,20 @@
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <header style="display: flex;">
+    <% if current_user != nil %>
+      <div class="nav_left flex-div">
+        <a href="/profile"><img src="<%= current_user.user_photo %>"><div class="user"><%= current_user.username %></div></a>
+      </div>
+      <form action="/logout" method="POST">
+        <button>Logout</button>
+      </form> 
+    <% else %>
+      <form action="/login" method="GET">
+        <button>Login</button>
+      </form>   
+    <% end %>
+  </header>
   <%= yield %>
 </body>
 </html>
