@@ -1,25 +1,67 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'bcrypt'
 
 require_relative 'models/book'
 require_relative 'models/review'
+require_relative 'models/user'
 
+enable :sessions
+
+def current_user
+	@current_user ||= User.find_by(id: session[:user].id)
+end
 
 get '/login' do 
 	erb :login
 end
 
-get '/' do 
-	erb :index
+post '/login' do 
+	@user = User.find_by(username: params[:username])
+
+	if @user && @user.authenticate(params[:password])
+		session[:user] = @user
+		redirect '/books'
+	else
+		redirect '/login'	
+	end
+end
+
+post '/logout' do 
+	session[:user_id] = nil
+	redirect '/login'
+end
+
+get '/register' do 
+	erb :register
+end
+
+post '/register' do 
+	@user = User.create(
+		username: params[:username],
+		password: params[:password],
+		password_confirmation: params[:password_confirmation]
+		)
+
+	if @user.save
+		redirect '/login'
+	else
+		redirect '/register'
+	end
+end
+
+get '/add-book' do 
+	erb :add_book
 end
 
 post '/add-book' do
-	@book = Book.create(title: params[:title], author: params[:author])
+	@book = session[:user].books.create(title: params[:title], author: params[:author])
+	@reviews = Review.where(book_id: @book.id) 
 
 	if @book.save
 		erb :book
 	else
-		erb :index
+		erb :add_book
 	end
 end
 
@@ -31,7 +73,7 @@ get '/books/:id' do
 end
 
 get '/books' do
-	@books = Book.all.order(created_at: :asc)
+	@books = Book.where(user_id: session[:user].id).order(created_at: :asc)
 	erb :books
 end
 
@@ -43,8 +85,10 @@ end
 post '/update-book/:id' do 
 	@book = Book.find(params[:id])
 	@book.update(title: params[:title], author: params[:author], description: params[:description])
+	@reviews = Review.where(book_id: params[:id])
 
 	erb :book
+
 end
 
 post '/delete-book/:id' do
@@ -53,7 +97,7 @@ post '/delete-book/:id' do
 	if @book.destroy
 		redirect '/books'
 	else
-		redirect '/'
+		redirect '/book'
 	end
 end
 
@@ -64,8 +108,17 @@ post '/review-book/:id' do
 end
 
 post '/update-review-book/:id' do
-	@book = Book.find(params[:id])
-	@book.reviews.create(user: params[:user], score: params[:score], content: params[:content])
 
-	erb :book
+	@review = current_user.reviews.create(score: params[:score], content: params[:content], book_id: params[:id])
+
+	@book = Book.find(params[:id])
+	@reviews = Review.where(book_id: params[:id])
+	# @book = Book.find(params[:id])
+	# @book.reviews.create(user_id: params[:user], score: params[:score], content: params[:content])
+
+	if @review.save
+		redirect '/books/:id'
+	else
+		erb :review_book
+	end
 end

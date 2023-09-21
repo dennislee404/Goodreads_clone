@@ -1,10 +1,18 @@
+<header style="display: flex;">
+	<div class="user">
+  		<%= current_user.username %>
+	</div>
+	<form action="/logout" method="POST">
+  		<button>Logout</button>
+	</form> 
+</header>	
 <section>
 	 <div class="review_container">
 	 	<form action="/update-review-book/<%= @book.id %>" method="POST">
 	 		<h3>Leave a review</h3>
 	 		<div class="x">
 				<div class="inputbox">
-					<input type="text" name="user" required>
+					<input type="text" name="user" value=<%= session[:user].username %> required>
 					<label for="user">USER</label>
 				</div>	
 				<div class="inputbox">

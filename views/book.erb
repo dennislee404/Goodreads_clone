@@ -1,3 +1,11 @@
+<header style="display: flex;">
+	<div class="user">
+  		<%= current_user.username %>
+	</div>
+	<form action="/logout" method="POST">
+  		<button>Logout</button>
+	</form> 
+</header>
 <section>
 	<div class="container">
 		<div>
@@ -20,7 +28,7 @@
 				</form>							
 			</div>
 			<div class="link">
-				<p><a href="/">Add more</a></p>
+				<p><a href="/add-book">Add more</a></p>
 			</div>
 			<div class="link">
 				<p><a href="/books">Show all books</a></p>
@@ -32,7 +40,7 @@
 		<% if @reviews.any? %>
 			<% @reviews.each do |review|%>>
 				<div class="description">
-					<%= review.user %> (<%= review.score %>/5) <br>
+					<%= User.find(review.user_id).username %> (<%= review.score %>/5) <br>
 					<%= review.content %>
 				</div>
 			<% end %>

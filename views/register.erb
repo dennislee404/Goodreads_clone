@@ -1,7 +1,7 @@
 <section>
 	<div class="container">
-		<form action="/login" method="POST">
-			<h2>Login</h2>
+		<form action="/register" method="POST">
+			<h2>Register</h2>
 			<div class="inputbox">
 				<input type="username" name="username" required>
 				<label for="username">USERNAME</label>
@@ -10,10 +10,11 @@
 				<input type="password" name="password" required>
 				<label for="password">PASSWORD</label>
 			</div>
-			<button>Login</button>
-			<div class="link">
-				<p><a href="/register">Create a new account</a></p>
-			</div>
+			<div class="inputbox">
+				<input type="password" name="password_confirmation" required>
+				<label for="password_confirmation">PASSWORD CONFIRMATION</label>
+			</div>			
+			<button>Register</button>
 		</form>
 	</div>
 </section>

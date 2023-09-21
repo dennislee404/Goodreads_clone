@@ -1,3 +1,11 @@
+<header style="display: flex;">
+	<div class="user">
+  		<%= current_user.username %>
+	</div>
+	<form action="/logout" method="POST">
+  		<button>Logout</button>
+	</form> 
+</header>	
 <section>
 	 <div class="container">
 	 	<form action="/update-book/<%= @book.id %>" method="POST">

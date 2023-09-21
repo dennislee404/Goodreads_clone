@@ -1,7 +1,15 @@
+<header style="display: flex;">
+	<div class="user">
+  		<%= current_user.username %>
+	</div>
+	<form action="/logout" method="POST">
+  		<button>Logout</button>
+	</form> 
+</header>
 <section>
 	<div class="container">
 		<form action=""> 
-			<h2>Book Library</h2>
+			<h2><%= current_user.username %>'s Library</h2>
 			<div class="library">
 				<% if @books.any? %>
 					<% @books.each do |book|%>
@@ -19,7 +27,7 @@
 				<% end %>
 			</div>
 			<div class="link">
-				<p><a href="/">Add more</a></p>
+				<p><a href="/add-book">Add more</a></p>
 			</div>
 		</form>
 	</div>
