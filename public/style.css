@@ -6,7 +6,7 @@
 
 .flex-div{
 	display: flex;
-	justify-content: center;
+	justify-content: center	;
 }
 
 section{
@@ -54,6 +54,11 @@ header{
 }
 
 .nav_left img{
+	width: 50px;
+	border-radius: 50%;
+}
+
+.description img{
 	width: 50px;
 	border-radius: 50%;
 }
@@ -148,6 +153,11 @@ button {
 	color: white
 }
 
+
+.review_description{
+
+}
+
 .description {
 	margin: 10px 0;
 	padding: 10px;
@@ -156,6 +166,9 @@ button {
 	border: 1px solid #ccc;
 	border-radius: 15px;
 	color: white;
+	display: flex;
+	align-content: center;
+	gap: 20px;
 }
 
 .review_container {

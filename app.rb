@@ -65,6 +65,12 @@ get '/profile' do
 	end
 end
 
+post '/update-profile-pic' do 
+	current_user.update(user_photo: params[:photo])
+
+	redirect '/books'
+end
+
 get '/add-book' do
 	if current_user == nil
 		redirect '/login'

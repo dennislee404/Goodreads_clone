@@ -34,10 +34,15 @@
 	<div class="container flex-div">
 		<h2>Reviews</h2>
 		<% if @reviews.any? %>
-			<% @reviews.each do |review|%>>
+			<% @reviews.each do |review|%>
 				<div class="description">
-					<%= User.find(review.user_id).username %> (<%= review.score %>/5) <br>
-					<%= review.content %>
+					<div class="left">
+						<img src="<%= User.find(review.user_id).user_photo %>">
+					</div>
+					<div class="review_description">
+						<%= User.find(review.user_id).username %> (<%= review.score %>/5) <br>
+						<%= review.content %>
+					</div>
 				</div>
 			<% end %>
 		<% else %>
